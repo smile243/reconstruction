@@ -13,12 +13,7 @@ import org.yjl.domain.BaseEntity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * @Description: jeecg 测试demo
- * @Author: jeecg-boot
- * @Date: 2018-12-29
- * @Version:V1.0
- */
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

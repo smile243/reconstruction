@@ -5,20 +5,20 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /yjl
-#  # undertow 配置
-#  undertow:
-#    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
-#    max-http-post-size: -1
-#    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
-#    # 每块buffer的空间大小,越小的空间被利用越充分
-#    buffer-size: 512
-#    # 是否分配的直接内存
-#    direct-buffers: true
-#    threads:
-#      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
-#      io: 8
-#      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
-#      worker: 256
+  # undertow 配置
+  undertow:
+    # HTTP post内容的最大大小。当值为-1时，默认值为大小是无限的
+    max-http-post-size: -1
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 512
+    # 是否分配的直接内存
+    direct-buffers: true
+    threads:
+      # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+      io: 8
+      # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+      worker: 256
 #rocketmq:
 #  producer:
 #    retry-times-when-send-failed: 10
@@ -34,6 +34,11 @@ server:
 #    grouplist:
 #      default: 192.168.1.157:18092
 #  tx-service-group: my_test_tx_group
+# 日志配置
+logging:
+  level:
+    org.springframework: warn
+    org.mybatis.spring.mapper: error
 run:
   executor:
     corePoolSize: ${EXECUTOR_CORE_POOL:60}
@@ -64,6 +69,8 @@ mybatis-plus:
       # AUTO 自增 NONE 空 INPUT 用户输入 ASSIGN_ID 雪花 ASSIGN_UUID 唯一 UUID
       # 如需改为自增 需要将数据库表全部设置为自增
       idType: ASSIGN_ID
+  configuration:
+    logImpl: org.apache.ibatis.logging.nologging.NoLoggingImpl
 --- # 数据源配置
 spring:
   datasource:
@@ -71,7 +78,7 @@ spring:
     # 动态数据源文档 https://www.kancloud.cn/tracy5546/dynamic-datasource/content
     dynamic:
       # 性能分析插件(有性能损耗 不建议生产环境使用)
-      p6spy: true
+      p6spy: false
       # 设置默认的数据源或者数据源组,默认值即为 master
       primary: master
       # 严格模式 匹配不到数据源则报错
@@ -94,18 +101,18 @@ spring:
       #          url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
       #          username:
       #          password:
-      hikari:
-        # 最大连接池数量
-        maxPoolSize: 20
-        # 最小空闲线程数量
-        minIdle: 10
-        # 配置获取连接等待超时的时间
-        connectionTimeout: 30000
-        # 校验超时时间
-        validationTimeout: 5000
-        # 空闲连接存活最大时间，默认10分钟
-        idleTimeout: 600000
-        # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
-        maxLifetime: 1800000
-        # 多久检查一次连接的活性
-        keepaliveTime: 30000
+#      hikari:
+#        # 最大连接池数量
+#        maxPoolSize: 20
+#        # 最小空闲线程数量
+#        minIdle: 10
+#        # 配置获取连接等待超时的时间
+#        connectionTimeout: 30000
+#        # 校验超时时间
+#        validationTimeout: 5000
+#        # 空闲连接存活最大时间，默认10分钟
+#        idleTimeout: 600000
+#        # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
+#        maxLifetime: 1800000
+#        # 多久检查一次连接的活性
+#        keepaliveTime: 30000

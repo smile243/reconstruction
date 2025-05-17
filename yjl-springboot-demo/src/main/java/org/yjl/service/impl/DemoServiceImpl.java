@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -37,7 +38,7 @@ public class DemoServiceImpl implements IDemoService {
     private final TransactionUtils transactionUtils;
     private final DemoMapper mapper;
     private final StudentMapper studentMapper;
-
+    private final Executor futureExecutor;
 
     private final Lock lock = new ReentrantLock();
     private int value;
@@ -218,7 +219,7 @@ public class DemoServiceImpl implements IDemoService {
     @Transactional(rollbackFor = Exception.class)
     public void transaction() {
         mapper.update(Wrappers.<Demo>lambdaUpdate().set(Demo::getAge, 18));
-        int a = 1 / 0;
+        //int a = 1 / 0;
         mapper.delete(Wrappers.query());
     }
 
@@ -234,5 +235,18 @@ public class DemoServiceImpl implements IDemoService {
         SpringUtils.getApplicationContext().publishEvent(demo);
         int a = 1 / 0;
         mapper.selectList();
+    }
+
+    /**
+     * spring默认会引入hikari，什么都不配置的话，连接池最大为10，超过的请求会等待，超过30s没获取到连接就会提示cannot open connection
+     */
+    @Override
+    public void dataSourcePool() {
+            mapper.update(Wrappers.<Demo>lambdaUpdate().set(Demo::getAge, 18));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

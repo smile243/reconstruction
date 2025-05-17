@@ -132,4 +132,11 @@ public class TestController {
         return R.ok();
     }
 
+    @GetMapping("/dataSourcePool")
+    @Operation(summary = "默认数据库线程池容量")
+    public R<?> dataSourcePool(){
+        service.dataSourcePool();
+        return R.ok();
+    }
+
 }

@@ -22,4 +22,6 @@ public interface IDemoService {
     default void transaction(){}
 
     void transactionEvent();
+
+    void dataSourcePool();
 }

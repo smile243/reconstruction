@@ -2,6 +2,9 @@ package org.yjl.service.impl;
 
 import cn.hutool.core.collection.ConcurrentHashSet;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.github.xiaolyuh.annotation.CacheEvict;
+import com.github.xiaolyuh.annotation.CachePut;
+import com.github.xiaolyuh.annotation.Cacheable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -248,5 +251,18 @@ public class DemoServiceImpl implements IDemoService {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    @CachePut(value = "cache-prefix:demo", key = "#demo.id", depict = "用户信息缓存")
+    public Demo cachePut(Demo demo) {
+        log.info("添加缓存,demoId:{}", demo.getId());
+        return demo;
+    }
+
+    @Override
+    @CacheEvict(value = "cache-prefix:demo", key = "#id")//2
+    public void cacheRemove(Long id) {
+        log.info("删除了缓存,demoId:{}", id);
     }
 }

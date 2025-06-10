@@ -101,18 +101,42 @@ spring:
       #          url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
       #          username:
       #          password:
-#      hikari:
-#        # 最大连接池数量
-#        maxPoolSize: 20
-#        # 最小空闲线程数量
-#        minIdle: 10
-#        # 配置获取连接等待超时的时间
-#        connectionTimeout: 30000
-#        # 校验超时时间
-#        validationTimeout: 5000
-#        # 空闲连接存活最大时间，默认10分钟
-#        idleTimeout: 600000
-#        # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
-#        maxLifetime: 1800000
-#        # 多久检查一次连接的活性
-#        keepaliveTime: 30000
+      hikari:
+        # 最大连接池数量
+        maxPoolSize: 20
+        # 最小空闲线程数量
+        minIdle: 10
+        # 配置获取连接等待超时的时间
+        connectionTimeout: 30000
+        # 校验超时时间
+        validationTimeout: 5000
+        # 空闲连接存活最大时间，默认10分钟
+        idleTimeout: 600000
+        # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
+        maxLifetime: 1800000
+        # 多久检查一次连接的活性
+        keepaliveTime: 30000
+#layering-cache 配置
+layering-cache:
+  stats: true
+  # 缓存命名空间，如果不配置取 "spring.application.name"
+  # namespace: layering-cache-web
+  redis:
+    database: 0
+    timeout: 60
+    password: ruoyi123
+    # redis单机
+    host: 127.0.0.1
+    port: 6379
+    # redis集群
+    #cluster: 127.0.0.1:6379,127.0.0.1:6378
+    # redis sentinel
+#    sentinel-nodes: 127.0.0.1:26379,127.0.0.1:26380,127.0.0.1:26381
+#    sentinel-master: mymaster
+  # 设置redis值的序列化方式,默认是kryo
+  #com.github.xiaolyuh.redis.serializer.KryoRedisSerializer
+  #com.github.xiaolyuh.redis.serializer.FastJsonRedisSerializer
+  #com.github.xiaolyuh.redis.serializer.JacksonRedisSerializer
+  #com.github.xiaolyuh.redis.serializer.JdkRedisSerializer
+  #com.github.xiaolyuh.redis.serializer.ProtostuffRedisSerializer
+    serializer: com.github.xiaolyuh.redis.serializer.KryoRedisSerializer

@@ -1,8 +1,8 @@
 package org.yjl;
 
+import com.github.xiaolyuh.cache.config.EnableLayeringCache;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,6 +18,8 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @MapperScan(value={"org.yjl.mapper"})
 @Slf4j
+//多级缓存
+@EnableLayeringCache
 public class Application {
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(Application.class);

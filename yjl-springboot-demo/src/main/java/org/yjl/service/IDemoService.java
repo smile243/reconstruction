@@ -1,5 +1,7 @@
 package org.yjl.service;
 
+import org.yjl.domain.entity.Demo;
+
 public interface IDemoService {
 
 
@@ -24,4 +26,8 @@ public interface IDemoService {
     void transactionEvent();
 
     void dataSourcePool();
+
+    Demo cachePut(Demo demo);
+
+    void cacheRemove(Long id);
 }

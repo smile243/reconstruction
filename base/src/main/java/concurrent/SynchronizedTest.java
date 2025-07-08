@@ -1,52 +1,30 @@
 package concurrent;
 
-import java.util.concurrent.TimeUnit;
 
-/**
- * Integer的--会导致对象改变,拆包
- * 使用concurrentHashMap解决
- *
- * @author yjl
- */
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class SynchronizedTest {
-
-    public static void main(String[] args) {
-        Thread why = new Thread(new TicketConsumer(10), "why");
-        Thread mx = new Thread(new TicketConsumer(10), "mx");
-        why.start();
-        mx.start();
-    }
-}
-
-class TicketConsumer implements Runnable {
-
-    private volatile static Integer ticket;
-
-    public TicketConsumer(int ticket) {
-        this.ticket = ticket;
-    }
-
-    //private final Interner<Integer> interner=Interners.newWeakInterner();
-    @Override
-    public void run() {
-        while (true) {
-            System.out.println(Thread.currentThread().getName() + "开始抢第" + ticket + "张票，对象加锁之前：" + System.identityHashCode(ticket));
-            //synchronized (interner.intern(ticket)) {
-            synchronized (ticket) {
-                System.out.println(Thread.currentThread().getName() + "抢到第" + ticket + "张票，成功锁到的对象：" + System.identityHashCode(ticket));
-                if (ticket > 0) {
-                    try {
-                        //模拟抢票延迟
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName() + "抢到了第" + ticket-- + "张票，票数减一");
-                } else {
-                    return;
-                }
+    private final Object o = new Object();
+    public void hello(){
+        System.out.println("进入方法");
+        //锁代码块可以实现更加细粒度的锁
+        synchronized (o){
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
+            System.out.println("进入同步代码块");
         }
+        System.out.println("方法执行结束");
+    }
+    public static void main(String[] args) {
+        SynchronizedTest SynchronizedTest = new SynchronizedTest();
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 3; i++) {
+            executorService.execute(SynchronizedTest::hello);
+        }
+        executorService.shutdown();
     }
 }
-

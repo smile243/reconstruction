@@ -16,6 +16,7 @@ import org.yjl.domain.entity.Demo;
 import org.yjl.domain.entity.Student;
 import org.yjl.mapper.DemoMapper;
 import org.yjl.mapper.StudentMapper;
+import org.yjl.service.BdMaterialService;
 import org.yjl.service.IDemoService;
 import org.yjl.utils.SpringUtils;
 import org.yjl.utils.TransactionUtils;
@@ -42,6 +43,7 @@ public class DemoServiceImpl implements IDemoService {
     private final DemoMapper mapper;
     private final StudentMapper studentMapper;
     private final Executor futureExecutor;
+    private final BdMaterialService bdMaterialService;
 
     private final Lock lock = new ReentrantLock();
     private int value;
@@ -94,7 +96,7 @@ public class DemoServiceImpl implements IDemoService {
         int threadCount = 5;
         CountDownLatch childMonitor = new CountDownLatch(threadCount);
         //子线程运行结果
-        List<Boolean> childResponse = new ArrayList();
+        List<Boolean> childResponse = new ArrayList<>();
         ExecutorService executor = Executors.newCachedThreadPool();
         for (int i = 0; i < threadCount; i++) {
             int finalI = i;
@@ -111,10 +113,10 @@ public class DemoServiceImpl implements IDemoService {
                     log.info("线程{}正常执行完成,等待其他线程执行结束,判断是否需要回滚", Thread.currentThread().getName());
                     mainMonitor.await();
                     if (IS_OK) {
-                        log.info("所有线程都正常完成,线程事务提交", Thread.currentThread().getName());
+                        log.info("所有线程都正常完成,线程事务提交{}", Thread.currentThread().getName());
                         transactionUtils.commit(transactionStatus);
                     } else {
-                        log.info("有线程出现异常,线程小事务回滚", Thread.currentThread().getName());
+                        log.info("有线程出现异常,线程小事务回滚{}", Thread.currentThread().getName());
                         transactionUtils.rollback(transactionStatus);
                     }
                 } catch (Exception e) {

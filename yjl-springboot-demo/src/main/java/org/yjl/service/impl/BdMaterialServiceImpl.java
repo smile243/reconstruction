@@ -7,6 +7,7 @@ import com.github.xiaolyuh.annotation.CacheEvict;
 import com.github.xiaolyuh.annotation.Cacheable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.yjl.domain.entity.BdMaterialPo;
 import org.yjl.mapper.BdMaterialMapper;
 import org.yjl.service.BdMaterialService;
@@ -49,5 +50,11 @@ public class BdMaterialServiceImpl extends ServiceImpl<BdMaterialMapper, BdMater
     @CacheEvict(value = "cache-prefix:material", key = "#no")
     public void delByNo(String no) {
         log.info("删除物料no:{}缓存成功", no);
+    }
+
+    @Override
+    @Transactional
+    public void test() {
+
     }
 }

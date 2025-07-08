@@ -22,4 +22,6 @@ public interface BdMaterialService extends IService<BdMaterialPo> {
     void delAll();
 
     void delByNo(String no);
+
+    void test();
 }

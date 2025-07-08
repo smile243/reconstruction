@@ -7,9 +7,8 @@ import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yjl
- * @Description take会在检测到getDelay<=0时移除元素
- * @date 2023/1/31 20:18
+ * take会在检测到getDelay<=0时移除元素
+ * @author: yjl
  */
 public class DelayTest {
     public static void main(String[] args) throws InterruptedException {

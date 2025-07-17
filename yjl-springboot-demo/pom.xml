@@ -36,6 +36,7 @@
         <layering.version>3.5.0</layering.version>
         <mybatis.version>3.5.16</mybatis.version>
         <mybatis-plus.version>3.5.11</mybatis-plus.version>
+        <redisson.version>3.45.1</redisson.version>
     </properties>
 
     <dependencies>
@@ -205,6 +206,19 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
             <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!--redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>${redisson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

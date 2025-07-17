@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
 @MapperScan(value={"org.yjl.mapper"})
 @Slf4j
 //多级缓存
-@EnableLayeringCache
+//@EnableLayeringCache
 public class Application {
     public static void main(String[] args) throws UnknownHostException {
         SpringApplication app = new SpringApplication(Application.class);

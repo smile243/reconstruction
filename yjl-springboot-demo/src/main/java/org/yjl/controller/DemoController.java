@@ -27,7 +27,7 @@ import java.util.concurrent.Executor;
 @RequestMapping("/test")
 @Slf4j
 @Tag(name = "测试")
-public class TestController {
+public class DemoController {
     private final Executor futureExecutor;
     private final IDemoService service;
 

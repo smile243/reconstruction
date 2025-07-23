@@ -1,3 +1,5 @@
+package org.yjl.utils;
+
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -19,10 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 public class GeneratorMybatisPlus {
 
     //需要配置
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&autoReconnect=true";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/scm?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&autoReconnect=true";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "root";
-    private static final String DB_TABLES = "bd_material";
+    private static final String DB_TABLES = "inventory_stock";
     private static final String PACKAGE_NAME = "org.yjl";
     private static final String AUTHOR = "yjl";
     private static final Boolean ENABLE_SWAGGER = true;

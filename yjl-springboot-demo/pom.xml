@@ -218,8 +218,8 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-ThreadGuess</artifactId>
-            <scope>ThreadGuess</scope>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!--  mockito+powermock     -->

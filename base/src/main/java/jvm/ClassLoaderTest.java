@@ -1,7 +1,7 @@
 package jvm;
 
 /**
- * @Description: 
+ * @Description:
  * @author: yjl
  * @date: 2022年01月27日 14:17
  */
@@ -10,6 +10,8 @@ public class ClassLoaderTest {
         //java核心类库都用引导类加载器Bootstrap加载的,是获取不到的 为null，所以显示null的都是由bootstrap加载的
         ClassLoader classLoader=String.class.getClassLoader();
         System.out.println(classLoader);
+        //扩展类加载器
+        System.out.println(sun.net.spi.nameservice.dns.DNSNameService.class.getClassLoader());
         //默认使用系统类加载器
         ClassLoader classLoader1=ClassLoaderTest.class.getClassLoader();
         System.out.println(classLoader1);

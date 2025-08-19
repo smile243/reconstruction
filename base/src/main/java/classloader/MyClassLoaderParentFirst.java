@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description:
- * @author: yjl
- * @date: 2023年03月02日 14:57
+ * 自定义类加载器分为重载classloader和urlClassloader
+ * @author yjl
  */
 public class MyClassLoaderParentFirst extends ClassLoader{
     private ClassLoader jdkClassLoader;
@@ -19,8 +18,8 @@ public class MyClassLoaderParentFirst extends ClassLoader{
 
     public MyClassLoaderParentFirst(ClassLoader jdkClassLoader) {
         this.jdkClassLoader=jdkClassLoader;
-        classPathMap.put("classloader.TestA", "D:/Test2/target/classes/classloader/TestA.class");
-        classPathMap.put("classloader.TestB", "D:/Test2/target/classes/classloader/TestB.class");
+        classPathMap.put("classloader.TestA", "/Users/yujiale/Documents/reconstruction/base/target/classes/classloader/TestA.class");
+        classPathMap.put("classloader.TestB", "/Users/yujiale/Documents/reconstruction/base/target/classes/classloader/TestB.class");
     }
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {

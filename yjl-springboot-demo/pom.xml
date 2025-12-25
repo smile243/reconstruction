@@ -38,6 +38,7 @@
         <mybatis-plus.version>3.5.11</mybatis-plus.version>
         <redisson.version>3.45.1</redisson.version>
         <powermock.version>2.0.9</powermock.version>
+        <sharding.version>5.0.0</sharding.version>
     </properties>
 
     <dependencies>
@@ -240,6 +241,12 @@
             <artifactId>powermock-module-junit4</artifactId>
             <version>${powermock.version}</version>
             <scope>ThreadGuess</scope>
+        </dependency>
+        <!--  分库分表  -->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+            <version>5.0.0</version>
         </dependency>
     </dependencies>
 

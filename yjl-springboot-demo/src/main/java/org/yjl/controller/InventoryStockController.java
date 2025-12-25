@@ -35,7 +35,7 @@ public class InventoryStockController {
     //出库
     @PostMapping("/out")
     @Operation(summary = "出库")
-    public R<?> put(@RequestBody EntryOutInventoryBatchDTO dto) {
+    public R<?> out(@RequestBody EntryOutInventoryBatchDTO dto) {
         inventoryStockService.out(dto);
         return R.ok();
     }

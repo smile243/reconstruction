@@ -116,6 +116,24 @@ spring:
         maxLifetime: 1800000
         # 多久检查一次连接的活性
         keepaliveTime: 30000
+  shardingsphere:
+    props:
+      sql-show: true
+    datasource:
+      ds0:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+        username: root
+        password: root
+        type: ${spring.datasource.type}
+      names: ds0
+    rules:
+      sharding:
+        sharding-algorithms:
+          custom-table-inline:
+            props:
+              algorithm-expression: ds0
+            type: INLINE
 #layering-cache 配置
 layering-cache:
   stats: true
